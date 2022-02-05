@@ -6,7 +6,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useCatch,
   useLoaderData,
 } from "remix";
 import type { MetaFunction } from "remix";
@@ -22,13 +21,12 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async () => {
   if (process.env.NODE_ENV === "production") {
     throw new Response("Not Found", {
       status: 404,
     });
   }
-
   return {
     ENV: {
       NODE_ENV: process.env.NODE_ENV,
