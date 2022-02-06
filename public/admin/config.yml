@@ -2,23 +2,46 @@ backend:
   name: git-gateway
   branch: main
 local_backend:
-  url: http://localhost:8081/api/v1
-  allowed_hosts: ["192.168.0.1"]
+  url: "http://localhost:8081/api/v1"
+  allowed_hosts:
+    - 192.168.0.1
 publish_mode: editorial_workflow
-media_folder: "content/uploads"
+media_folder: public/media
+public_folder: media
 collections:
-  - name: "landing"
-    label: "Strona startowa"
-    folder: "cms/pages"
-    create: false
-    slug: "landing_page"
-    fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
-      - { label: "Title", name: "title", widget: "string" }
-      - {
-          label: "Featured Image",
-          name: "thumbnail",
-          widget: "image",
-          required: false,
-        }
-      - { label: "Body", name: "body", widget: "markdown" }
+  - label: Pages
+    name: pages
+    files:
+      - name: landing
+        label: Strona startowa
+        file: cms/pages/landing_page.md
+        fields:
+          - label: Nazwa strony
+            name: title
+            widget: string
+          - label: Główne powitanie
+            name: mainWelcome
+            widget: object
+            fields:
+              - label: Nagłówek 1
+                name: header1
+                widget: string
+              - label: Nagłówek 2
+                name: header2
+                widget: string
+              - label: Główny obrazek
+                name: heroImage
+                widget: image
+          - label: Zaproszenie do współpracy
+            name: actionContent
+            widget: object
+            fields:
+              - label: Główne pytanie
+                name: question
+                widget: string
+              - label: Zaproszenie
+                name: subQuestion
+                widget: string
+              - label: Podsumowanie
+                name: summary
+                widget: string
