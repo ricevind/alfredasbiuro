@@ -33,3 +33,5 @@ node_modules
 
 # tailwindcss
 /app/tailwind.css
+
+.vscode
