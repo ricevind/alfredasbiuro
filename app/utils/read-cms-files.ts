@@ -3,7 +3,7 @@ import nodeFs from "fs/promises";
 
 const cmsRootPath = "cms";
 const cmsPagesPath = "pages";
-const pagesPaths = ["landing_page.md", "contact_page.md"] as const;
+const pagesPaths = ["landing_page.md", "offers.md"] as const;
 
 type Pages = typeof pagesPaths[number];
 type PageParseConfig = {
@@ -53,7 +53,7 @@ async function parsePageContentToJson(
   const parsedPageWithProcessedMarkdownProps = parsedPage;
 
   type DataType = typeof parsedPageWithProcessedMarkdownProps.data;
-  console.log(mdProps);
+
   for (const mdProp of mdProps) {
     const propContent = parsedPageWithProcessedMarkdownProps.data[
       mdProp

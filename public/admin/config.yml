@@ -45,3 +45,50 @@ collections:
               - label: Podsumowanie
                 name: summary
                 widget: string
+          - label: Opis
+            name: description
+            widget: text
+          - label: Adres
+            name: adress
+            widget: object
+            fields:
+              - label: ulica
+                name: street
+                widget: string
+              - label: miasto
+                name: city
+                widget: string
+          - label: E-mail
+            name: email
+            widget: string
+          - label: Telefony
+            name: phones
+            widget: object
+            fields:
+              - label: Telefon 1
+                name: phone1
+                widget: string
+              - label: Telefon 2
+                name: phone2
+                widget: string
+              - label: Telefon 3
+                name: phone3
+                widget: string
+      - name: offers
+        label: Oferta
+        file: cms/pages/offers.md
+        fields:
+          - label: Wstęp
+            name: description
+            widget: text
+          - label: Usługi
+            name: offersList
+            widget: list
+            fields:
+              - label: Usługa
+                name: description
+                widget: text
+              - label: Wyróżnienie
+                name: emphasis
+                widget: boolean
+                required: false
