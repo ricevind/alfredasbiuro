@@ -1,6 +1,6 @@
 ---
 description: "Od 26 lat świadczymy wysokiej jakości usługi w zakresie:"
-offersList:
+offers:
   - description: Prowadzenia księgowości
     emphasis: false
   - description: spraw kadrowo - płacowych

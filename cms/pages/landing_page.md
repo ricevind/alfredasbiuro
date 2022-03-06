@@ -1,13 +1,14 @@
 ---
 title: Alfredas Biuro
+logoImage: media/kdip.jpeg
 mainWelcome:
   header1: Doradca Podatkowo Ubezpieczeniowy
   header2: mgr Alfreda Sobierajska
-  heroImage: media/alfredasbiuro-main.jpeg
+  heroImage: media/christin-hume-hcfwew744z4-unsplash.jpeg
 actionContent:
-  question: Potrzebujesz pomocy ?
+  question: Potrzebujesz pomocy\u00A0?
   subQuestion: Zapraszamy
-  summary: od poniedziałku do piątku od 7:00 do 16:00
+  summary: od\u00A0poniedziałku do\u00A0piątku od\u00A07:00\u00A0do\u00A016:00
 description: Z naszej wiedzy i doświadczenia korzystają małe i średnie firmy
   oraz osoby fizyczne. Każde zlecenie traktujemy w sposób indywidualny,
   dostosowując się do jego potrzeb i oczekiwań. W każdej zgłoszonej do nas

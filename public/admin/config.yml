@@ -19,6 +19,9 @@ collections:
           - label: Nazwa strony
             name: title
             widget: string
+          - label: Logo
+            name: logoImage
+            widget: image
           - label: Główne powitanie
             name: mainWelcome
             widget: object
@@ -82,7 +85,7 @@ collections:
             name: description
             widget: text
           - label: Usługi
-            name: offersList
+            name: offers
             widget: list
             fields:
               - label: Usługa
