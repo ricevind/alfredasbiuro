@@ -22,11 +22,6 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async () => {
-  if (process.env.NODE_ENV === "production") {
-    throw new Response("Not Found", {
-      status: 404,
-    });
-  }
   return {
     ENV: {
       NODE_ENV: process.env.NODE_ENV,

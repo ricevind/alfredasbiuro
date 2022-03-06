@@ -7,6 +7,7 @@ export interface FormHTMLAttributes {
 export const ContactForm = ({ className }: { className?: string }) => {
   return (
     <form
+      method="POST"
       name="contact"
       data-netlify="true"
       className={joinClassNames("w-full max-w-lg", className)}
