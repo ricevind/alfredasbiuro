@@ -8,15 +8,14 @@ export const ContactForm = ({ className }: { className?: string }) => {
   return (
     <form
       method="POST"
-      name="contact"
-      data-netlify="true"
       className={joinClassNames("w-full max-w-lg", className)}
     >
+      <input type="hidden" name="form-name" value="contact" />
       <div className="-mx-3 mb-6 flex flex-wrap">
         <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
           <label
             className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700"
-            htmlFor="grid-first-name"
+            htmlFor="name"
           >
             Imię
           </label>
@@ -27,12 +26,13 @@ export const ContactForm = ({ className }: { className?: string }) => {
             id="grid-first-name"
             type="text"
             placeholder="Jan"
+            name="name"
           ></input>
         </div>
         <div className="w-full px-3 md:w-1/2">
           <label
             className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700"
-            htmlFor="grid-last-name"
+            htmlFor="ast-name"
           >
             Nazwisko
           </label>
@@ -40,9 +40,10 @@ export const ContactForm = ({ className }: { className?: string }) => {
             required
             autoComplete="family-name"
             className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
-            id="grid-last-name"
+            id="last-name"
             type="text"
             placeholder="Kowalski"
+            name="last-name"
           ></input>
         </div>
       </div>
@@ -50,7 +51,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
         <div className="w-full px-3">
           <label
             className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700"
-            htmlFor="grid-password"
+            htmlFor="email"
           >
             E-mail
           </label>
@@ -59,6 +60,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
             className="mb-3 block w-full appearance-none rounded border border-gray-200 bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
             id="email"
             type="email"
+            name="email"
           ></input>
         </div>
       </div>
@@ -66,13 +68,14 @@ export const ContactForm = ({ className }: { className?: string }) => {
         <div className="w-full px-3">
           <label
             className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700"
-            htmlFor="grid-password"
+            htmlFor="message"
           >
             Wiadomość
           </label>
           <textarea
             className="mb-3 block h-48 w-full resize-none appearance-none rounded border border-gray-200 bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
             id="message"
+            name="message"
           ></textarea>
         </div>
       </div>
