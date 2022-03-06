@@ -67,17 +67,17 @@ export default function Index() {
           </svg>
         </div>
 
-        <Block className="relative mt-8 space-y-8">
-          <div className="flex-row text-center">
+        <Block className="relative mt-8 space-y-8 lg:mt-12 lg:h-80">
+          <div className="flex-row">
             <FormatMessage
               as="h1"
-              className="text-3xl font-extrabold tracking-tight text-gray-900"
+              className="text-center text-3xl font-extrabold tracking-tight  text-gray-900 lg:text-left"
             >
               {mainWelcome.header1}
             </FormatMessage>
             <FormatMessage
               as="h2"
-              className="text-3xl font-extrabold tracking-tight text-gray-900"
+              className="text-center text-3xl font-extrabold tracking-tight text-gray-900 lg:text-left"
             >
               {mainWelcome.header2}
             </FormatMessage>
@@ -90,7 +90,7 @@ export default function Index() {
         </Block>
       </div>
 
-      <Block className="relative mt-8">
+      <Block className="relative mt-8 lg:mt-12">
         <FormatMessage
           as="p"
           className="text-center text-xl font-medium tracking-wide text-black antialiased"
@@ -99,49 +99,51 @@ export default function Index() {
         </FormatMessage>
       </Block>
 
-      <Block className="mt-8 flex flex-wrap gap-y-2.5 bg-neutral-100 p-4">
-        <div className="flex flex-1 flex-col flex-nowrap">
-          <AnimateNumber
-            className="text-center font-mono text-4xl tracking-wider"
-            start={0}
-            end={100}
-            duration={2000}
-          ></AnimateNumber>
-          <span className="mt-2 text-center text-xl">Klientów</span>
-        </div>
-        <div className="flex flex-1 flex-col flex-nowrap">
-          <AnimateNumber
-            className="text-center font-mono text-4xl tracking-wider"
-            start={0}
-            end={100}
-            duration={2000}
-            suffix="%"
-          ></AnimateNumber>
-          <span className="mt-2 text-center text-xl">Zadowolenia</span>
-        </div>
-        <div className="flex flex-1 flex-col flex-nowrap">
-          <AnimateNumber
-            className="text-center font-mono text-4xl tracking-wider"
-            start={0}
-            end={20}
-            duration={2000}
-          ></AnimateNumber>
-          <span className="mt-2 text-center text-xl">Lat doświadczenia</span>
-        </div>
-        <div className="flex flex-1 flex-col flex-nowrap">
-          <AnimateNumber
-            className="text-center font-mono text-4xl tracking-wider"
-            start={0}
-            end={8500}
-            duration={2000}
-          ></AnimateNumber>
-          <span className="mt-2 text-center text-xl">
-            dokumentów miesięcznie
-          </span>
-        </div>
-      </Block>
+      <div className="bg-neutral-100">
+        <Block className="mt-8 flex flex-wrap gap-y-2.5 p-4 md:flex-nowrap lg:mt-12 lg:p-8">
+          <div className="flex w-1/2 flex-col flex-nowrap">
+            <AnimateNumber
+              className="text-center font-mono text-4xl tracking-wider"
+              start={0}
+              end={100}
+              duration={2000}
+            ></AnimateNumber>
+            <span className="mt-2 text-center text-xl">Klientów</span>
+          </div>
+          <div className="flex w-1/2 flex-col flex-nowrap">
+            <AnimateNumber
+              className="text-center font-mono text-4xl tracking-wider"
+              start={0}
+              end={100}
+              duration={2000}
+              suffix="%"
+            ></AnimateNumber>
+            <span className="mt-2 text-center text-xl">Zadowolenia</span>
+          </div>
+          <div className="flex w-1/2 flex-col flex-nowrap">
+            <AnimateNumber
+              className="text-center font-mono text-4xl tracking-wider"
+              start={0}
+              end={20}
+              duration={2000}
+            ></AnimateNumber>
+            <span className="mt-2 text-center text-xl">Lat doświadczenia</span>
+          </div>
+          <div className="flex w-1/2 flex-col flex-nowrap">
+            <AnimateNumber
+              className="text-center font-mono text-4xl tracking-wider"
+              start={0}
+              end={8500}
+              duration={2000}
+            ></AnimateNumber>
+            <span className="mt-2 text-center text-xl">
+              dokumentów miesięcznie
+            </span>
+          </div>
+        </Block>
+      </div>
 
-      <Block className="mt-8">
+      <Block className="mt-8 lg:mt-12">
         <OfferList {...offers}></OfferList>
       </Block>
 
@@ -159,11 +161,20 @@ export default function Index() {
             points="0,100 100,100 100,0"
           />
         </svg>
-        <Block className="pt-4">
+        <Block className="py-4">
           <Reveal from="left">
             <ContactForm className="mx-auto rounded-lg bg-white p-4 shadow-md"></ContactForm>
           </Reveal>
         </Block>
+      </div>
+      <div className="mt-4">
+        <iframe
+          className="w-full"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2522.6129853515663!2d16.02374791595272!3d50.78274747124599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470efa33f4aa4c03%3A0x527e2372888be008!2sJana%20Paw%C5%82a%20II%2011A%2C%2058-400%20Kamienna%20G%C3%B3ra!5e0!3m2!1spl!2spl!4v1646575489040!5m2!1spl!2spl"
+          style={{ border: 0 }}
+          loading="lazy"
+          height="560"
+        ></iframe>
       </div>
       <Block className="h-8">footer</Block>
     </>

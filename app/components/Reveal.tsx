@@ -24,7 +24,7 @@ export const Reveal = ({
   className,
   from,
 }: React.PropsWithChildren<{ from: Variants; className?: string }>) => {
-  const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true });
+  const [ref, inView] = useInView({ triggerOnce: true });
 
   const variant = variants[from];
 

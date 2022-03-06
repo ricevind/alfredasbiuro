@@ -1,8 +1,16 @@
 import { joinClassNames } from "~/utils";
 
+export interface FormHTMLAttributes {
+  netlify: boolean;
+}
+
 export const ContactForm = ({ className }: { className?: string }) => {
   return (
-    <form className={joinClassNames("w-full max-w-lg", className)}>
+    <form
+      name="contact"
+      data-netlify="true"
+      className={joinClassNames("w-full max-w-lg", className)}
+    >
       <div className="-mx-3 mb-6 flex flex-wrap">
         <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
           <label
@@ -71,7 +79,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
         <div className="md:w-1/3">
           <button
             className="focus:shadow-outline rounded bg-amber-300 py-2 px-4 font-bold text-white shadow hover:bg-amber-400 focus:outline-none"
-            type="button"
+            type="submit"
           >
             Send
           </button>
