@@ -1,3 +1,4 @@
+import { Form } from "remix";
 import { joinClassNames } from "~/utils";
 
 export interface FormHTMLAttributes {
@@ -7,7 +8,7 @@ export interface FormHTMLAttributes {
 export const ContactForm = ({ className }: { className?: string }) => {
   return (
     <form
-      method="POST"
+      action="/contact"
       className={joinClassNames("w-full max-w-lg", className)}
     >
       <input type="hidden" name="form-name" value="contact" />

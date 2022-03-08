@@ -9,16 +9,16 @@ import { FormatMessage } from "~/components/utils/FormatMessage";
 import { LandingPage, OffersList } from "~/models";
 import { joinClassNames, readPage } from "~/utils";
 
+type LoaderData = {
+  landingPage: LandingPage;
+  offers: OffersList;
+};
+
 export const loader: LoaderFunction = async () => {
   const landingPageFile = await readPage("landing_page.md");
   const offersFile = await readPage("offers.md");
 
   return { landingPage: landingPageFile.data, offers: offersFile.data };
-};
-
-type LoaderData = {
-  landingPage: LandingPage;
-  offers: OffersList;
 };
 
 function Block({ children, className }: React.ComponentPropsWithoutRef<"div">) {
