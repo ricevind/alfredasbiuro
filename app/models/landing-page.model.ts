@@ -1,5 +1,6 @@
 export interface LandingPage {
   title: string;
+  logoImage: string;
   mainWelcome: {
     header1: string;
     header2: string;
