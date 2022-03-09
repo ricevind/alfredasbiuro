@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { Form } from "remix";
 import { joinClassNames } from "~/utils";
 
 export interface FormHTMLAttributes {
@@ -6,15 +7,9 @@ export interface FormHTMLAttributes {
 }
 
 export const ContactForm = ({ className }: { className?: string }) => {
-  const submitForm = (formEvent: FormEvent<HTMLFormElement>) => {
-    formEvent.preventDefault();
-    const formData = new FormData(formEvent.currentTarget);
-    fetch("/", { method: "post", body: formData });
-  };
-
   return (
-    <form
-      onSubmit={submitForm}
+    <Form
+      action="post"
       className={joinClassNames("w-full max-w-lg", className)}
     >
       <input type="hidden" name="form-name" value="contact" />
@@ -97,6 +92,6 @@ export const ContactForm = ({ className }: { className?: string }) => {
         </div>
         <div className="md:w-2/3"></div>
       </div>
-    </form>
+    </Form>
   );
 };
