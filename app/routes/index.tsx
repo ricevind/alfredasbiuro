@@ -18,7 +18,7 @@ type LoaderData = {
 export const loader: LoaderFunction = async () => {
   const landingPageFile = await readPage("landing_page.md");
   const offersFile = await readPage("offers.md");
-  const test = process.env.DEPLOY_URL!;
+  const test = process.env;
 
   return { landingPage: landingPageFile.data, offers: offersFile.data, test };
 };
@@ -81,7 +81,7 @@ export default function Index() {
 
         <Block className="relative mt-8 space-y-8 lg:mt-12 lg:h-80">
           <div className="flex-row">
-            {test}
+            <pre>{JSON.stringify(test, null, 2)}</pre>
             <FormatMessage
               as="h1"
               className="text-center text-3xl font-extrabold tracking-tight  text-gray-900 lg:text-left"
