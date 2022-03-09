@@ -8,9 +8,9 @@
   port = 3000
 
 [[redirects]]
-  from = "/contact"
+  from = "/form"
   to = "/"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/*"

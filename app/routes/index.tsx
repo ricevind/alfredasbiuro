@@ -25,7 +25,10 @@ export const loader: LoaderFunction = async () => {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  await fetch(process.env.DEPLOY_URL!, { method: "post", body: formData });
+  await fetch(`${process.env.DEPLOY_URL!}/form`, {
+    method: "post",
+    body: formData,
+  });
 
   return redirect("/");
 };
