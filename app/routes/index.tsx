@@ -1,5 +1,5 @@
 import React from "react";
-import { LoaderFunction, useLoaderData } from "remix";
+import { ActionFunction, LoaderFunction, redirect, useLoaderData } from "remix";
 import { AnimateNumber } from "~/components/AnimateNumber";
 import { ContactForm } from "~/components/ContactForm";
 import { OfferList } from "~/components/OfferList";
@@ -19,6 +19,16 @@ export const loader: LoaderFunction = async () => {
   const offersFile = await readPage("offers.md");
 
   return { landingPage: landingPageFile.data, offers: offersFile.data };
+};
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  await fetch(`${process.env.URL!}/form`, {
+    method: "post",
+    body: formData,
+  });
+
+  return redirect("/");
 };
 
 function Block({ children, className }: React.ComponentPropsWithoutRef<"div">) {

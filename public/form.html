@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <form name="contact" data-netlify="true">
+    <form name="contact" netlify netlify-honeypot="bot-field">
+      <input name="bot=field" />
       <input name="name" type="text" />
       <input type="text" name="surname" />
       <input name="email" type="email" />
-      <input name="message"></input>
+      <input name="message" />
+      <input type="checkbox" name="personal-data-processing-agreement" />
     </form>
   </body>
 </html>

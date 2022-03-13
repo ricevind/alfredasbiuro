@@ -7,11 +7,12 @@ export interface FormHTMLAttributes {
 
 export const ContactForm = ({ className }: { className?: string }) => {
   return (
-    <form
-      action="/contact"
+    <Form
+      method="post"
       className={joinClassNames("w-full max-w-lg", className)}
     >
       <input type="hidden" name="form-name" value="contact" />
+      <input name="bot=field" type="text" className="sr-only" />
       <div className="-mx-3 mb-6 flex flex-wrap">
         <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
           <label
@@ -80,17 +81,31 @@ export const ContactForm = ({ className }: { className?: string }) => {
           ></textarea>
         </div>
       </div>
+      <div className="-mx-3 mb-6 flex flex-wrap">
+        <div className="w-full px-3">
+          <input
+            required
+            className="mr-[1ch] h-6 w-6 rounded-md border-0 align-bottom text-green-600 focus:ring-0"
+            type="checkbox"
+            name="personal-data-processing-agreement"
+          ></input>
+          <span className="leading-tight text-gray-700">
+            Wyrażam zgodę na przetwarzanie danych zgodnie z
+            <a href="#"> polityką prywatności</a>
+          </span>
+        </div>
+      </div>
       <div className="md:flex md:items-center">
         <div className="md:w-1/3">
           <button
             className="focus:shadow-outline rounded bg-amber-300 py-2 px-4 font-bold text-white shadow hover:bg-amber-400 focus:outline-none"
             type="submit"
           >
-            Send
+            Wyślij
           </button>
         </div>
         <div className="md:w-2/3"></div>
       </div>
-    </form>
+    </Form>
   );
 };
