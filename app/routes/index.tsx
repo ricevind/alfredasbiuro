@@ -12,15 +12,13 @@ import { joinClassNames, readPage } from "~/utils";
 type LoaderData = {
   landingPage: LandingPage;
   offers: OffersList;
-  test: string;
 };
 
 export const loader: LoaderFunction = async () => {
   const landingPageFile = await readPage("landing_page.md");
   const offersFile = await readPage("offers.md");
-  const test = process.env;
 
-  return { landingPage: landingPageFile.data, offers: offersFile.data, test };
+  return { landingPage: landingPageFile.data, offers: offersFile.data };
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -42,7 +40,7 @@ function Block({ children, className }: React.ComponentPropsWithoutRef<"div">) {
 }
 
 export default function Index() {
-  const { landingPage, offers, test } = useLoaderData<LoaderData>();
+  const { landingPage, offers } = useLoaderData<LoaderData>();
 
   const { mainWelcome, actionContent, description } = landingPage;
 
@@ -81,7 +79,6 @@ export default function Index() {
 
         <Block className="relative mt-8 space-y-8 lg:mt-12 lg:h-80">
           <div className="flex-row">
-            <pre>{JSON.stringify(test, null, 2)}</pre>
             <FormatMessage
               as="h1"
               className="text-center text-3xl font-extrabold tracking-tight  text-gray-900 lg:text-left"
