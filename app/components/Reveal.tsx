@@ -8,7 +8,7 @@ const slideFromLeft = {
 };
 
 const slideFromRight = {
-  start: "-translate-x-full",
+  start: "translate-x-full",
   end: "translate-x-0",
 };
 
@@ -29,7 +29,7 @@ export const Reveal = ({
   const variant = variants[from];
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={joinClassNames(className, "overflow-hidden")}>
       <div
         className={joinClassNames(
           "transition duration-1000",

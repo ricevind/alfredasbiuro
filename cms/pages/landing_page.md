@@ -3,7 +3,7 @@ title: Alfredas Biuro
 logoImage: media/kdip.jpeg
 mainWelcome:
   header1: Doradca Podatkowo Ubezpieczeniowy
-  header2: mgr Alfreda Sobierajska
+  header2: Alfreda Sobierajska
   heroImage: media/christin-hume-hcfwew744z4-unsplash.jpeg
 actionContent:
   question: Potrzebujesz pomocy\u00A0?

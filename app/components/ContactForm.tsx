@@ -5,7 +5,18 @@ export interface FormHTMLAttributes {
   netlify: boolean;
 }
 
-export const ContactForm = ({ className }: { className?: string }) => {
+export const ContactForm = ({
+  handlePolicyClick,
+  className,
+}: {
+  handlePolicyClick: () => void;
+  className?: string;
+}) => {
+  const onPolicyClick = () => {
+    handlePolicyClick();
+    document.querySelector("#policy")?.scrollIntoView();
+  };
+
   return (
     <Form
       method="post"
@@ -90,8 +101,13 @@ export const ContactForm = ({ className }: { className?: string }) => {
             name="personal-data-processing-agreement"
           ></input>
           <span className="leading-tight text-gray-700">
-            Wyrażam zgodę na przetwarzanie danych zgodnie z
-            <a href="#"> polityką prywatności</a>
+            Wyrażam zgodę na przetwarzanie danych zgodnie z{" "}
+            <span
+              className="cursor-pointer text-blue-300"
+              onClick={onPolicyClick}
+            >
+              polityką prywatności
+            </span>
           </span>
         </div>
       </div>

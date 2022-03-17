@@ -15,12 +15,14 @@ export const OfferList = ({
     <div className={joinClassNames(className)} {...props}>
       <p className="text-2xl">{description}</p>
 
-      <ul className="mt-2 space-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6">
+      <ul className="sm: mt-4 items-center space-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4 sm:space-y-0">
         {offers.map((offer) => (
-          <Reveal from="right" key={offer.description}>
+          <Reveal from="right" key={offer.description} className="">
             <li>
-              <CheckMark className="inline text-green-800"></CheckMark>{" "}
-              {offer.description}
+              <div className="flex flex-row text-lg leading-6">
+                <CheckMark className="flex-shrink-0 text-green-800"></CheckMark>{" "}
+                {offer.description}
+              </div>
             </li>
           </Reveal>
         ))}

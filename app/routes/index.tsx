@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ActionFunction, LoaderFunction, redirect, useLoaderData } from "remix";
 import { AnimateNumber } from "~/components/AnimateNumber";
 import { ContactForm } from "~/components/ContactForm";
+import { ContactInfo } from "~/components/ContactInfo";
+import { Footer } from "~/components/Footer";
 import { OfferList } from "~/components/OfferList";
 import { Reveal } from "~/components/Reveal";
 import { TopNavigation } from "~/components/TopNavigation";
@@ -44,6 +46,33 @@ export default function Index() {
 
   const { mainWelcome, actionContent, description } = landingPage;
 
+  const [markRodo, setMarkRodo] = useState(false);
+  const rodoLock = useRef(false);
+
+  useEffect(() => {
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      `<style>
+        html {
+          scroll-behavior: smooth;
+        }
+      </style>`
+    );
+  }, []);
+
+  const handlePolicyClick = () => {
+    if (rodoLock.current) {
+      return;
+    }
+    setMarkRodo(true);
+    rodoLock.current = true;
+
+    setTimeout(() => {
+      setMarkRodo(false);
+      rodoLock.current = false;
+    }, 3000);
+  };
+
   return (
     <>
       <TopNavigation
@@ -58,7 +87,7 @@ export default function Index() {
       <div className="relative overflow-hidden bg-white">
         <div className="lg:absolute lg:inset-0">
           <img
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full lg:opacity-50 lg:blur-sm lg:brightness-100"
+            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
             src={mainWelcome.heroImage}
             alt=""
           />
@@ -77,26 +106,26 @@ export default function Index() {
           </svg>
         </div>
 
-        <Block className="relative mt-8 space-y-8 lg:mt-12 lg:h-80">
-          <div className="flex-row">
+        <Block className="relative mt-8 space-y-8 lg:flex lg:h-96 lg:items-center">
+          <div className="flex-row lg:max-w-fit lg:rounded-2xl  lg:bg-opacity-60 lg:bg-clip-padding lg:p-8 lg:py-4 lg:backdrop-blur-xl lg:backdrop-filter">
             <FormatMessage
               as="h1"
-              className="text-center text-3xl font-extrabold tracking-tight  text-gray-900 lg:text-left"
+              className="text-center text-3xl font-extrabold tracking-tight text-gray-900 lg:text-left lg:text-zinc-200"
             >
               {mainWelcome.header1}
             </FormatMessage>
             <FormatMessage
               as="h2"
-              className="text-center text-3xl font-extrabold tracking-tight text-gray-900 lg:text-left"
+              className="text-center text-3xl font-extrabold tracking-tight text-gray-900 lg:text-left lg:text-zinc-200"
             >
               {mainWelcome.header2}
             </FormatMessage>
           </div>
-          <div className="text-2xl font-extrabold tracking-tight text-gray-900">
+          {/* <div className="text-2xl font-extrabold tracking-tight text-gray-900">
             <FormatMessage as="p">{actionContent.question}</FormatMessage>
             <FormatMessage as="p">{actionContent.subQuestion}</FormatMessage>
             <FormatMessage as="p">{actionContent.summary}</FormatMessage>
-          </div>
+          </div> */}
         </Block>
       </div>
 
@@ -110,10 +139,10 @@ export default function Index() {
       </Block>
 
       <div className="bg-neutral-100">
-        <Block className="mt-8 flex flex-wrap gap-y-2.5 p-4 md:flex-nowrap lg:mt-12 lg:p-8">
+        <Block className="mt-16 flex flex-wrap gap-y-2.5 p-4 md:flex-nowrap lg:mt-12 lg:p-8">
           <div className="flex w-1/2 flex-col flex-nowrap">
             <AnimateNumber
-              className="text-center font-mono text-4xl tracking-wider"
+              className="text-center text-4xl tabular-nums tracking-wider"
               start={0}
               end={100}
               duration={2000}
@@ -122,7 +151,7 @@ export default function Index() {
           </div>
           <div className="flex w-1/2 flex-col flex-nowrap">
             <AnimateNumber
-              className="text-center font-mono text-4xl tracking-wider"
+              className="text-center text-4xl tabular-nums tracking-wider"
               start={0}
               end={100}
               duration={2000}
@@ -132,7 +161,7 @@ export default function Index() {
           </div>
           <div className="flex w-1/2 flex-col flex-nowrap">
             <AnimateNumber
-              className="text-center font-mono text-4xl tracking-wider"
+              className="text-center text-4xl tabular-nums tracking-wider"
               start={0}
               end={20}
               duration={2000}
@@ -141,7 +170,7 @@ export default function Index() {
           </div>
           <div className="flex w-1/2 flex-col flex-nowrap">
             <AnimateNumber
-              className="text-center font-mono text-4xl tracking-wider"
+              className="text-center text-4xl tabular-nums tracking-wider"
               start={0}
               end={8500}
               duration={2000}
@@ -153,13 +182,13 @@ export default function Index() {
         </Block>
       </div>
 
-      <Block className="mt-8 lg:mt-12">
+      <Block className="mt-16 lg:mt-12">
         <OfferList {...offers}></OfferList>
       </Block>
 
       <div className="relative mt-16  bg-neutral-100">
         <svg
-          className="absolute top-0 h-24 w-full -translate-y-full text-neutral-100"
+          className="absolute top-0 hidden h-24 w-full -translate-y-full text-neutral-100 lg:block"
           fill="currentColor"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
@@ -171,9 +200,15 @@ export default function Index() {
             points="0,100 100,100 100,0"
           />
         </svg>
-        <Block className="py-4">
-          <Reveal from="left">
-            <ContactForm className="mx-auto rounded-lg bg-white p-4 shadow-md"></ContactForm>
+        <Block className="py-4 lg:flex lg:flex-row">
+          <Reveal from="left" className=" lg:mx-auto lg:flex-auto">
+            <ContactInfo className="m-auto"></ContactInfo>
+          </Reveal>
+          <Reveal className="mt-4 lg:mt-0  lg:flex-auto" from="right">
+            <ContactForm
+              handlePolicyClick={handlePolicyClick}
+              className="mx-auto rounded-lg bg-white p-4 shadow-md"
+            ></ContactForm>
           </Reveal>
         </Block>
       </div>
@@ -186,7 +221,9 @@ export default function Index() {
           height="560"
         ></iframe>
       </div>
-      <Block className="h-8">footer</Block>
+      <div className="mt-4">
+        <Footer markRodo={markRodo}></Footer>
+      </div>
     </>
   );
 }
