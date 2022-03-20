@@ -20,7 +20,7 @@ export const ContactForm = ({
   return (
     <Form
       method="post"
-      className={joinClassNames("w-full max-w-lg", className)}
+      className={joinClassNames("mb-2 w-full max-w-lg", className)}
     >
       <input type="hidden" name="form-name" value="contact" />
       <input name="bot-field" type="text" className="sr-only" />
@@ -103,7 +103,7 @@ export const ContactForm = ({
           <span className="leading-tight text-gray-700">
             Wyrażam zgodę na przetwarzanie danych zgodnie z{" "}
             <span
-              className="cursor-pointer text-blue-300"
+              className="cursor-pointer text-blue-300 hover:text-blue-400"
               onClick={onPolicyClick}
             >
               polityką prywatności

@@ -4,11 +4,11 @@ import { joinClassNames } from "~/utils";
 export const Footer = ({ markRodo = false }: { markRodo: boolean }) => {
   return (
     <footer className="bg-gray-700 py-6 px-4">
-      <div className="mt-2  md:flex md:items-center md:justify-between">
+      <div className="mt-2 flex items-center justify-between">
         <span className="text-sm text-gray-300 sm:text-center">
           © {new Date().getFullYear()} Alfredasbiuro. All Rights Reserved.{" "}
         </span>
-        <div className="mt-4 flex space-x-6  md:mt-0">
+        <div className="flex space-x-6 ">
           <a
             href="https://www.facebook.com/sobierajskapl/?locale=pl_PL"
             target="_blank"
@@ -31,7 +31,7 @@ export const Footer = ({ markRodo = false }: { markRodo: boolean }) => {
       </div>
       <div
         id="policy"
-        className={joinClassNames({
+        className={joinClassNames("mt-4", {
           "rounded ring-2 ring-red-300 ring-offset-4 ring-offset-gray-700":
             markRodo,
         })}
@@ -47,7 +47,10 @@ export const Footer = ({ markRodo = false }: { markRodo: boolean }) => {
           Podanie danych jest dobrowolne. W dowolnej chwili możesz żądać
           usunięcia lub modyfikacji swoich danych.
           <br /> W tym celu należy przesłać na e-mail:{" "}
-          <a className="font-semibold" href="mailto:alfredasbiuro@gmail.com">
+          <a
+            className="cursor-pointer font-semibold text-blue-300 hover:text-blue-400"
+            href="mailto:alfredasbiuro@gmail.com"
+          >
             alfredasbiuro@gmail.com
           </a>{" "}
           informacje niezbędne do podjęcia przez nas wymienionych działań.

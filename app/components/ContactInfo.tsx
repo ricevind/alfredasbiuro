@@ -1,41 +1,73 @@
-import React from "React";
+import React from "react";
 import { joinClassNames } from "~/utils";
+import { FormatMessage } from "./utils/FormatMessage";
 
-export const ContactInfo = ({ className }: { className?: string }) => {
+interface ContactInfoProps {
+  className?: string;
+  contactLabel: string;
+  address: { line1: string; line2: string };
+  phones: {
+    label: string;
+    phone: string;
+    type: "cell" | "land";
+  }[];
+}
+
+export const ContactInfo = ({
+  className,
+  address,
+  phones,
+  contactLabel,
+}: ContactInfoProps) => {
   return (
     <div className={joinClassNames(className)}>
       <div className="mx-auto max-w-max text-xl tracking-wider subpixel-antialiased">
-        Sobierajska&nbsp;Alfreda Doradztwo&nbsp;Podatkowe
+        <FormatMessage>{contactLabel}</FormatMessage>
       </div>
       <div className="mx-auto mt-4 max-w-max">
         <div className="flex flex-row items-center">
           <LocationIcon></LocationIcon>
           <div>
-            <span className="block sm:inline">ul. Jana Pawła II 11a, </span>
             <span className="block sm:inline">
-              58-400&nbsp;Kamienna&nbsp;Góra
+              <FormatMessage>{address.line1}</FormatMessage>
+            </span>
+            <span className="block sm:inline">
+              <FormatMessage>{address.line2}</FormatMessage>
             </span>
           </div>
         </div>
         <div className="mt-4 space-y-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
-          <div className="flex flex-row items-center">
-            <PhoneIcon></PhoneIcon>
-            <span className="block">tel./fax 75 744 78 97</span>
-          </div>
-          <div className="flex flex-row items-center">
-            <PhoneIcon></PhoneIcon>
-            <span className="block">tel./fax 75 645 16 85</span>
-          </div>
-          <div className="flex flex-row items-center">
-            <CellPhoneIcon></CellPhoneIcon>
-            <span className="block">kom. 600 890 818</span>
-          </div>
-          <div className="flex flex-row items-center">
-            <CellPhoneIcon></CellPhoneIcon>
-            <span className="block">kom. 609 585 629</span>
-          </div>
+          {phones.map((phone) => (
+            <PhoneInfo key={phone.phone} {...phone}></PhoneInfo>
+          ))}
         </div>
       </div>
+    </div>
+  );
+};
+
+const PhoneInfo = ({
+  label,
+  type,
+  phone,
+}: {
+  label: string;
+  phone: string;
+  type: "cell" | "land";
+}) => {
+  const iconMap: Record<typeof type, React.JSXElementConstructor<any>> = {
+    cell: CellPhoneIcon,
+    land: PhoneIcon,
+  };
+
+  const Icon = iconMap[type];
+
+  return (
+    <div className="flex flex-row items-center">
+      <Icon></Icon>
+      <a href={`tel:${phone}`} className="block cursor-pointer">
+        {label}
+      </a>
     </div>
   );
 };

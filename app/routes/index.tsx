@@ -8,7 +8,7 @@ import { OfferList } from "~/components/OfferList";
 import { Reveal } from "~/components/Reveal";
 import { TopNavigation } from "~/components/TopNavigation";
 import { FormatMessage } from "~/components/utils/FormatMessage";
-import { LandingPage, OffersList } from "~/models";
+import { LandingPage, Menuitem, OffersList } from "~/models";
 import { joinClassNames, readPage } from "~/utils";
 
 type LoaderData = {
@@ -33,19 +33,66 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect("/");
 };
 
-function Block({ children, className }: React.ComponentPropsWithoutRef<"div">) {
+function Block({
+  children,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <div className={joinClassNames("mx-auto max-w-7xl px-4", className)}>
+    <div
+      className={joinClassNames(
+        "mx-auto max-w-7xl scroll-mt-24 px-4",
+        className
+      )}
+      {...props}
+    >
       {children}
     </div>
   );
 }
 
+function useMenu(
+  menu: LandingPage["menu"],
+  menuOrder: LandingPage["menuOrder"]
+): Menuitem[] {
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = document.location.hash;
+      if (hash) {
+        setHash(hash);
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  return menuOrder.map(({ value: key }) => {
+    const menuItem = menu[key];
+    const isActive = hash.includes(menuItem.slug);
+    return { ...menuItem, isActive };
+  });
+}
+
 export default function Index() {
   const { landingPage, offers } = useLoaderData<LoaderData>();
 
-  const { mainWelcome, actionContent, description } = landingPage;
+  const {
+    mainWelcome,
+    description,
+    logoImage,
+    menu,
+    menuOrder,
+    address,
+    phones,
+    contactLabel,
+  } = landingPage;
 
+  const menuItems = useMenu(menu, menuOrder);
   const [markRodo, setMarkRodo] = useState(false);
   const rodoLock = useRef(false);
 
@@ -76,13 +123,9 @@ export default function Index() {
   return (
     <>
       <TopNavigation
+        links={menuItems}
         className="sticky top-0 z-10 h-24 bg-white"
-        logo={
-          <img
-            className="h-full w-full object-cover"
-            src={landingPage.logoImage}
-          ></img>
-        }
+        logo={<img className="h-full  object-cover" src={logoImage}></img>}
       ></TopNavigation>
       <div className="relative overflow-hidden bg-white">
         <div className="lg:absolute lg:inset-0">
@@ -129,7 +172,7 @@ export default function Index() {
         </Block>
       </div>
 
-      <Block className="relative mt-8 lg:mt-12">
+      <Block className="relative mt-8 lg:mt-12" id={menu.about.slug}>
         <FormatMessage
           as="p"
           className="text-center text-xl font-medium tracking-wide text-black antialiased"
@@ -182,7 +225,7 @@ export default function Index() {
         </Block>
       </div>
 
-      <Block className="mt-16 lg:mt-12">
+      <Block className="mt-16 lg:mt-12" id={menu.offer.slug}>
         <OfferList {...offers}></OfferList>
       </Block>
 
@@ -200,9 +243,14 @@ export default function Index() {
             points="0,100 100,100 100,0"
           />
         </svg>
-        <Block className="py-4 lg:flex lg:flex-row">
+        <Block className="py-4 lg:flex lg:flex-row" id={menu.contact.slug}>
           <Reveal from="left" className=" lg:mx-auto lg:flex-auto">
-            <ContactInfo className="m-auto"></ContactInfo>
+            <ContactInfo
+              contactLabel={contactLabel}
+              phones={phones}
+              address={address}
+              className="m-auto"
+            ></ContactInfo>
           </Reveal>
           <Reveal className="mt-4 lg:mt-0  lg:flex-auto" from="right">
             <ContactForm
