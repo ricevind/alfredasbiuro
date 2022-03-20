@@ -9,7 +9,8 @@ import {
   useLoaderData,
 } from "remix";
 import type { MetaFunction } from "remix";
-import styles from "./tailwind.css";
+import tailwind from "./tailwind.css";
+import styles from "./styles.css";
 import { SiteUnderConstruction } from "./components/site-under-construction";
 import siteUnderConstructionUrl from "./assets/images/building_site.svg";
 
@@ -18,15 +19,18 @@ export const meta: MetaFunction = () => {
 };
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    { rel: "stylesheet", href: tailwind },
+    { rel: "stylesheet", href: styles },
+  ];
 }
 
 export const loader: LoaderFunction = async () => {
-  if (process.env.NODE_ENV === "production") {
-    throw new Response("Not Found", {
-      status: 404,
-    });
-  }
+  // if (process.env.NODE_ENV === "production") {
+  //   throw new Response("Not Found", {
+  //     status: 404,
+  //   });
+  // }
   return {
     ENV: {
       NODE_ENV: process.env.NODE_ENV,

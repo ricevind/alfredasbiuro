@@ -1,12 +1,14 @@
 import { Popover, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
+import { Menuitem } from "~/models";
 import { joinClassNames } from "~/utils/join-class-names";
 
 type Props = {
   logo: React.ReactNode;
+  links: Menuitem[];
 } & React.ComponentPropsWithoutRef<"div">;
 
-export const TopNavigation = ({ logo, className, ...props }: Props) => {
+export const TopNavigation = ({ logo, className, links, ...props }: Props) => {
   return (
     <div
       className={joinClassNames(
@@ -20,7 +22,7 @@ export const TopNavigation = ({ logo, className, ...props }: Props) => {
       <Popover className="sm:hidden">
         {({ open }) => (
           <>
-            <Popover.Button className="relative z-50 block cursor-pointer items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 hover:outline-none hover:ring-2 hover:ring-inset hover:ring-indigo-500">
+            <Popover.Button className="relative z-50 block cursor-pointer items-center justify-center rounded-md text-gray-700 hover:bg-gray-100 hover:outline-none hover:ring-2 hover:ring-inset hover:ring-amber-500">
               {open ? <MenuCloseIcon></MenuCloseIcon> : <MenuIcon></MenuIcon>}
             </Popover.Button>
             <Transition
@@ -37,51 +39,45 @@ export const TopNavigation = ({ logo, className, ...props }: Props) => {
                 className="absolute inset-y-0 -inset-x-2 flex items-center bg-white p-10"
               >
                 <div className="relative h-full w-full">
-                  <MenuList className="absolute w-full space-y-4 overflow-hidden rounded-lg bg-white p-10 shadow-md ring-1 ring-black ring-opacity-5"></MenuList>
+                  <MenuList
+                    links={links}
+                    className="absolute w-full space-y-2 overflow-hidden rounded-lg bg-white p-10 shadow-md ring-1 ring-black ring-opacity-5"
+                  ></MenuList>
                 </div>
               </Popover.Panel>
             </Transition>
           </>
         )}
       </Popover>
-      <MenuList className="ml-10 hidden space-x-8 pr-4 sm:flex"></MenuList>
+      <MenuList
+        links={links}
+        className="ml-10 hidden space-x-8 pr-4 sm:flex"
+      ></MenuList>
     </div>
   );
 };
 
-const MenuList = ({ className }: React.ComponentPropsWithoutRef<"ul">) => {
+const MenuList = ({
+  className,
+  links,
+}: React.ComponentPropsWithoutRef<"ul"> & {
+  links: Menuitem[];
+}) => {
   return (
     <ul className={className}>
-      <li
-        className="cursor-pointer font-medium text-gray-500 hover:text-gray-900"
-        tabIndex={1}
-      >
-        Item 1
-      </li>
-      <li
-        className="cursor-pointer font-medium text-gray-500 hover:text-gray-900"
-        tabIndex={1}
-      >
-        Item 2
-      </li>
-      <li
-        className="cursor-pointer font-medium text-gray-500 hover:text-gray-900"
-        tabIndex={1}
-      >
-        Item 3
-      </li>
-      <li
-        className="cursor-pointer font-medium text-gray-500 hover:text-gray-900"
-        tabIndex={1}
-      >
-        Item 4
-      </li>
-      <li
-        className="cursor-pointer font-medium text-gray-500 hover:text-gray-900"
-        tabIndex={1}
-      >
-        Item 5
-      </li>
+      {links.map((link) => (
+        <a key={link.slug} href={`#${link.slug}`}>
+          <li
+            className={joinClassNames(
+              "cursor-pointer rounded-md p-4 font-medium text-gray-500 hover:bg-amber-400  hover:text-gray-900",
+              { "bg-amber-300": link.isActive }
+            )}
+            tabIndex={1}
+          >
+            {link.label}
+          </li>
+        </a>
+      ))}
     </ul>
   );
 };

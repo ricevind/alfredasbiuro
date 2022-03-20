@@ -1,4 +1,19 @@
+export interface CMSMenuItem {
+  label: string;
+  slug: string;
+}
+
+export interface Menuitem extends CMSMenuItem {
+  isActive: boolean;
+}
+
 export interface LandingPage {
+  menuOrder: { value: keyof LandingPage["menu"] }[];
+  menu: {
+    about: CMSMenuItem;
+    contact: CMSMenuItem;
+    offer: CMSMenuItem;
+  };
   title: string;
   logoImage: string;
   mainWelcome: {
@@ -6,19 +21,17 @@ export interface LandingPage {
     header2: string;
     heroImage: string;
   };
-  actionContent: {
-    question: string;
-    subQuestion: string;
-    summary: string;
-  };
+  // actionContent: {
+  //   question: string;
+  //   subQuestion: string;
+  //   summary: string;
+  // };
   description: string;
-  adress: {
-    street: string;
-    city: string;
-  };
+  contactLabel: string;
+  address: { line1: string; line2: string };
   phones: {
-    phone1: string;
-    phone2: string;
-    phone3: string;
-  };
+    label: string;
+    phone: string;
+    type: "cell" | "land";
+  }[];
 }

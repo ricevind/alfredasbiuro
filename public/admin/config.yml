@@ -16,6 +16,51 @@ collections:
         label: Strona startowa
         file: cms/pages/landing_page.md
         fields:
+          - label: Menu
+            name: menu
+            widget: object
+            collapsed: false
+            fields:
+              - label: Kontakt
+                name: contact
+                widget: object
+                summary: "{{ fields.label }}"
+                fields:
+                  - label: Element
+                    name: label
+                    widget: string
+                  - label: Slug
+                    name: slug
+                    widget: string
+              - label: O nas
+                name: about
+                widget: object
+                summary: "{{ fields.label }}"
+                fields:
+                  - label: Element
+                    name: label
+                    widget: string
+                  - label: Slug
+                    name: slug
+                    widget: string
+              - label: Oferta
+                name: offer
+                widget: object
+                summary: "{{ fields.label }}"
+                fields:
+                  - label: Element
+                    name: label
+                    widget: string
+                  - label: Slug
+                    name: slug
+                    widget: string
+          - label: Kolejność menu
+            name: menuOrder
+            widget: list
+            fields:
+              - label: Element
+                name: value
+                widget: string
           - label: Nazwa strony
             name: title
             widget: string
@@ -35,48 +80,51 @@ collections:
               - label: Główny obrazek
                 name: heroImage
                 widget: image
-          - label: Zaproszenie do współpracy
-            name: actionContent
-            widget: object
-            fields:
-              - label: Główne pytanie
-                name: question
-                widget: string
-              - label: Zaproszenie
-                name: subQuestion
-                widget: string
-              - label: Podsumowanie
-                name: summary
-                widget: string
+          # - label: Zaproszenie do współpracy
+          #   name: actionContent
+          #   widget: object
+          #   fields:
+          #     - label: Główne pytanie
+          #       name: question
+          #       widget: string
+          #     - label: Zaproszenie
+          #       name: subQuestion
+          #       widget: string
+          #     - label: Podsumowanie
+          #       name: summary
+          #       widget: string
           - label: Opis
             name: description
             widget: text
+          - label: Nagłówek informacji kontaktowych
+            widget: string
+            name: contactLabel
           - label: Adres
-            name: adress
+            name: address
             widget: object
             fields:
-              - label: ulica
-                name: street
+              - label: Linia Pierwsza
+                name: line1
                 widget: string
-              - label: miasto
-                name: city
+              - label: Linia Druga
+                name: line2
                 widget: string
-          - label: E-mail
-            name: email
-            widget: string
           - label: Telefony
             name: phones
-            widget: object
+            widget: list
             fields:
-              - label: Telefon 1
-                name: phone1
+              - label: Linia z telefonem
+                name: label
                 widget: string
-              - label: Telefon 2
-                name: phone2
+              - label: Sam numer
+                name: phone
                 widget: string
-              - label: Telefon 3
-                name: phone3
-                widget: string
+              - label: "Typ telefonu"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Stacjonarny", value: "land" }
+                  - { label: "Komórkowy", value: "cell" }
       - name: offers
         label: Oferta
         file: cms/pages/offers.md

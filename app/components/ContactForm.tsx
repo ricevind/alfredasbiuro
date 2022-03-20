@@ -5,14 +5,25 @@ export interface FormHTMLAttributes {
   netlify: boolean;
 }
 
-export const ContactForm = ({ className }: { className?: string }) => {
+export const ContactForm = ({
+  handlePolicyClick,
+  className,
+}: {
+  handlePolicyClick: () => void;
+  className?: string;
+}) => {
+  const onPolicyClick = () => {
+    handlePolicyClick();
+    document.querySelector("#policy")?.scrollIntoView();
+  };
+
   return (
     <Form
       method="post"
-      className={joinClassNames("w-full max-w-lg", className)}
+      className={joinClassNames("mb-2 w-full max-w-lg", className)}
     >
       <input type="hidden" name="form-name" value="contact" />
-      <input name="bot=field" type="text" className="sr-only" />
+      <input name="bot-field" type="text" className="sr-only" />
       <div className="-mx-3 mb-6 flex flex-wrap">
         <div className="mb-6 w-full px-3 md:mb-0 md:w-1/2">
           <label
@@ -90,8 +101,13 @@ export const ContactForm = ({ className }: { className?: string }) => {
             name="personal-data-processing-agreement"
           ></input>
           <span className="leading-tight text-gray-700">
-            Wyrażam zgodę na przetwarzanie danych zgodnie z
-            <a href="#"> polityką prywatności</a>
+            Wyrażam zgodę na przetwarzanie danych zgodnie z{" "}
+            <span
+              className="cursor-pointer text-blue-300 hover:text-blue-400"
+              onClick={onPolicyClick}
+            >
+              polityką prywatności
+            </span>
           </span>
         </div>
       </div>
