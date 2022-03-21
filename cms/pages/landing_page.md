@@ -17,7 +17,7 @@ menuOrder:
   - value: contact
   - value: offer
   - value: about
-title: Alfredas Biuro
+title: Alfredas Biuro +
 logoImage: media/kdip.jpeg
 mainWelcome:
   header1: Doradca Podatkowo Ubezpieczeniowy
