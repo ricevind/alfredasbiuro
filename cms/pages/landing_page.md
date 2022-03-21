@@ -20,7 +20,7 @@ menuOrder:
 title: Alfredas Biuro
 logoImage: media/kdip.jpeg
 mainWelcome:
-  header1: Doradca Podatkowo Ubezpieczeniowy
+  header1: Doradca Podatkowo Ubezpieczeniowy +
   header2: Alfreda Sobierajska
   heroImage: media/christin-hume-hcfwew744z4-unsplash.jpeg
 description: Z naszej wiedzy i doświadczenia korzystają małe i średnie firmy
