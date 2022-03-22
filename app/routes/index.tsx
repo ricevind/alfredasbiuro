@@ -8,19 +8,25 @@ import { OfferList } from "~/components/OfferList";
 import { Reveal } from "~/components/Reveal";
 import { TopNavigation } from "~/components/TopNavigation";
 import { FormatMessage } from "~/components/utils/FormatMessage";
-import { LandingPage, Menuitem, OffersList } from "~/models";
+import { LandingPage, Menuitem, OffersList, OfficeInNumbers } from "~/models";
 import { joinClassNames, readPage } from "~/utils";
 
 type LoaderData = {
   landingPage: LandingPage;
   offers: OffersList;
+  officeInNumbers: OfficeInNumbers;
 };
 
 export const loader: LoaderFunction = async () => {
   const landingPageFile = await readPage("landing_page.md");
   const offersFile = await readPage("offers.md");
+  const officeInNumbers = await readPage("office-in-numbers.md");
 
-  return { landingPage: landingPageFile.data, offers: offersFile.data };
+  return {
+    landingPage: landingPageFile.data,
+    offers: offersFile.data,
+    officeInNumbers: officeInNumbers.data,
+  };
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -79,7 +85,7 @@ function useMenu(
 }
 
 export default function Index() {
-  const { landingPage, offers } = useLoaderData<LoaderData>();
+  const { landingPage, offers, officeInNumbers } = useLoaderData<LoaderData>();
 
   const {
     mainWelcome,
@@ -164,11 +170,6 @@ export default function Index() {
               {mainWelcome.header2}
             </FormatMessage>
           </div>
-          {/* <div className="text-2xl font-extrabold tracking-tight text-gray-900">
-            <FormatMessage as="p">{actionContent.question}</FormatMessage>
-            <FormatMessage as="p">{actionContent.subQuestion}</FormatMessage>
-            <FormatMessage as="p">{actionContent.summary}</FormatMessage>
-          </div> */}
         </Block>
       </div>
 
@@ -183,45 +184,21 @@ export default function Index() {
 
       <div className="bg-neutral-100">
         <Block className="mt-16 flex flex-wrap gap-y-2.5 p-4 md:flex-nowrap lg:mt-12 lg:p-8">
-          <div className="flex w-1/2 flex-col flex-nowrap">
-            <AnimateNumber
-              className="text-center text-4xl tabular-nums tracking-wider"
-              start={0}
-              end={100}
-              duration={2000}
-            ></AnimateNumber>
-            <span className="mt-2 text-center text-xl">Klientów</span>
-          </div>
-          <div className="flex w-1/2 flex-col flex-nowrap">
-            <AnimateNumber
-              className="text-center text-4xl tabular-nums tracking-wider"
-              start={0}
-              end={100}
-              duration={2000}
-              suffix="%"
-            ></AnimateNumber>
-            <span className="mt-2 text-center text-xl">Zadowolenia</span>
-          </div>
-          <div className="flex w-1/2 flex-col flex-nowrap">
-            <AnimateNumber
-              className="text-center text-4xl tabular-nums tracking-wider"
-              start={0}
-              end={20}
-              duration={2000}
-            ></AnimateNumber>
-            <span className="mt-2 text-center text-xl">Lat doświadczenia</span>
-          </div>
-          <div className="flex w-1/2 flex-col flex-nowrap">
-            <AnimateNumber
-              className="text-center text-4xl tabular-nums tracking-wider"
-              start={0}
-              end={8500}
-              duration={2000}
-            ></AnimateNumber>
-            <span className="mt-2 text-center text-xl">
-              dokumentów miesięcznie
-            </span>
-          </div>
+          {officeInNumbers.elements.map((element) => (
+            <div
+              key={element.label}
+              className="flex w-1/2 flex-col flex-nowrap"
+            >
+              <AnimateNumber
+                className="text-center text-4xl tabular-nums tracking-wider"
+                start={0}
+                end={element.value}
+                duration={2000}
+                suffix={element?.percents ? "%" : undefined}
+              ></AnimateNumber>
+              <span className="mt-2 text-center text-xl">{element.label}</span>
+            </div>
+          ))}
         </Block>
       </div>
 

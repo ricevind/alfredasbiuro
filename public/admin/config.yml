@@ -143,3 +143,21 @@ collections:
                 name: emphasis
                 widget: boolean
                 required: false
+      - name: officeInNumbers
+        label: Biuro w liczbach
+        file: cms/pages/office-in-numbers.md
+        fields:
+          - label: Elementy
+            name: elements
+            widget: list
+            fields:
+              - label: Opis
+                name: label
+                widget: string
+              - label: Liczba
+                name: value
+                widget: number
+              - label: Procenty
+                name: percents
+                widget: boolean
+                required: false

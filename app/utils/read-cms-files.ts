@@ -3,7 +3,11 @@ import nodeFs from "fs/promises";
 
 const cmsRootPath = "cms";
 const cmsPagesPath = "pages";
-const pagesPaths = ["landing_page.md", "offers.md"] as const;
+const pagesPaths = [
+  "landing_page.md",
+  "offers.md",
+  "office-in-numbers.md",
+] as const;
 
 type Pages = typeof pagesPaths[number];
 
