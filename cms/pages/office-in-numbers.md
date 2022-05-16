@@ -1,7 +1,7 @@
 ---
 elements:
   - label: Klientów
-    value: 100
+    value: 101
   - label: Zadowolenia
     value: 100
     percents: true
